@@ -7,7 +7,11 @@ function decode(message) {
     if (message[i] === '(') {
       returnedString = decode(message.substring(i + 1))   // i + 1 to avoid the infinite recursivity
       returnedString = '(' + returnedString               // Add the '(' again
-      invertedString += invertString(returnedString)      // Invert the returned string
+      
+      for (let j = 0; j < returnedString.length; j++) {               // Invert the returned string
+        invertedString += returnedString[returnedString.length - j - 1]
+      }
+      
       i += returnedString.length - 1                      // Add length - 1 to avoid printing the word without inverting again
     }
     // If the character is ')', we exit the recursivity
@@ -21,7 +25,11 @@ function decode(message) {
     }
   }
 
-  return deleteParenthesis(invertedString)
+  // Delete all '(' and ')' before returning the result
+  let finalString = invertedString.split('(').join('')
+  finalString = finalString.split(')').join('')
+
+  return finalString
 }
 
 // Function to invert strings
@@ -37,7 +45,7 @@ function invertString(string) {
 
 // Function to delete all '(' and ')' from a string
 function deleteParenthesis(string) {
-  let finalString = string.split('(').join('')
+  let finalString = string.split('(').join('')  
   finalString = finalString.split(')').join('')
 
   return finalString
