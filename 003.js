@@ -30,16 +30,14 @@ function findNaughtyStep(original, modified) {
 }
 
 
-// const original = 'abcd'
-// const modified = 'abcde'
-//findNaughtyStep(original, modified)) // 'e'
+let original = 'abcd'
+let modified = 'abcde'
+console.log(findNaughtyStep(original, modified)) // 'e'
 
-// const original = 'stepfor'
-// const modified = 'stepor'
-// findNaughtyStep(original, modified) // 'f'
+original = 'stepfor'
+modified = 'stepor'
+console.log(findNaughtyStep(original, modified)) // 'f'
 
-// const original = 'abcde'
-// const modified = 'abcde'
-// findNaughtyStep(original, modified) // ''
-
-console.log(findNaughtyStep(original, modified))
+original = 'abcde'
+modified = 'abcde'
+console.log(findNaughtyStep(original, modified)) // ''
