@@ -33,15 +33,27 @@ function organizeGifts(gifts) {
   let groupsList = []
 
   // Variable to save the previous index in the forEach
-  var previousIndex = 0
+  var previousIndex = -1
 
   // Adding all groups to groupsList
   letterIndexes.forEach(index => {
     groupsList.push(gifts.substring(previousIndex + 1, index + 1))
     previousIndex = index
   })
-
+  
   console.log(groupsList)
+
+  groupsList.forEach(group => {
+    let number = group.substring(0, group.length - 1)
+
+    let boxCount = number / 10
+    let paleCount = boxCount / 5
+    let bagCount = number % 10
+
+    let tempNumber = number
+
+    console.log(`Box: ${boxCount}. Pale: ${paleCount}. Bag: ${bagCount}`)
+  })
 
   return resultString
 }
