@@ -1,16 +1,53 @@
 function organizeGifts(gifts) {
   let resultString = ''
+  
+  const giftsRegex = new RegExp('^([0-9]+[A-Za-z])+$');
+  const letterRegex = new RegExp('[A-Za-z]')
 
+  // Function to get the indexes in the string where the letters of the groups are
+  function getLetterIndexes(string) {
+    let indexList = []
+
+    for (let i = 0; i < string.length; i++) {
+      if (letterRegex.test(string[i])) {
+        indexList.push(i)
+      }
+    }
+
+    return indexList
+  } 
+
+  // Check if we dont pass any arguments to the function or the string is empty
   if (!gifts) {
     return ''
   }
 
+  // Check if the string matches the regular expression
+  if(!giftsRegex.test(gifts)) {
+    return ''
+  }
 
+  let letterIndexes = getLetterIndexes(gifts)
 
-  return ''
+  // Array to save each group separated
+  let groupsList = []
+
+  // Variable to save the previous index in the forEach
+  var previousIndex = 0
+
+  // Adding all groups to groupsList
+  letterIndexes.forEach(index => {
+    groupsList.push(gifts.substring(previousIndex + 1, index + 1))
+    previousIndex = index
+  })
+
+  console.log(groupsList)
+
+  return resultString
 }
 
-const result1 = organizeGifts(`76a11b`)
+const testString = '76a11b14c144f4i'
+const result1 = organizeGifts(testString)
 console.log(result1)
 // '[a]{a}{a}(aaaaaa){b}(b)'
 
