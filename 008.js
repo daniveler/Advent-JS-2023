@@ -1,8 +1,8 @@
 function organizeGifts(gifts) {
   let resultString = ''
   
-  const giftsRegex = new RegExp('^([0-9]+[A-Za-z])+$');
-  const letterRegex = new RegExp('[A-Za-z]')
+  const giftsRegex = new RegExp('^([0-9]+[A-Za-z])+$') // Regex to validate the gifts string
+  const letterRegex = new RegExp('[A-Za-z]') // Regex to validate if a char is a letter
 
   // Function to get the indexes in the string where the letters of the groups are
   function getLetterIndexes(string) {
@@ -28,12 +28,8 @@ function organizeGifts(gifts) {
   }
 
   let letterIndexes = getLetterIndexes(gifts)
-
-  // Array to save each group separated
-  let groupsList = []
-
-  // Variable to save the previous index in the forEach
-  var previousIndex = -1
+  let groupsList = []   // Array to save each group separated
+  var previousIndex = -1  // Variable to save the previous index in the forEach
 
   // Adding all groups to groupsList
   letterIndexes.forEach(index => {
@@ -41,24 +37,39 @@ function organizeGifts(gifts) {
     previousIndex = index
   })
   
-  console.log(groupsList)
-
   groupsList.forEach(group => {
     let number = group.substring(0, group.length - 1)
+    let letter = group.substring(group.length - 1)
 
-    let boxCount = number / 10
-    let paleCount = boxCount / 5
+
+    let boxCount = Math.floor(number / 10)
+    let paleCount = Math.floor(boxCount / 5)
+    boxCount -= paleCount * 5 // Substracts the boxes that conform a pale
+    
     let bagCount = number % 10
 
-    let tempNumber = number
+    for (let i = 0; i < paleCount; i++) {
+      resultString += `[${letter}]`
+    }
 
-    console.log(`Box: ${boxCount}. Pale: ${paleCount}. Bag: ${bagCount}`)
+    for (let i = 0; i < boxCount; i++) {
+      resultString += `{${letter}}`
+    }
+
+    if (bagCount !== 0) {
+      resultString += '('
+      for (let i = 0; i < bagCount; i++) {
+        resultString += `${letter}`
+      }
+      resultString += ')'
+    }
+    
   })
 
   return resultString
 }
 
-const testString = '76a11b14c144f4i'
+const testString = '76a11b'
 const result1 = organizeGifts(testString)
 console.log(result1)
 // '[a]{a}{a}(aaaaaa){b}(b)'
