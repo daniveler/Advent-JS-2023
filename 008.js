@@ -29,7 +29,7 @@ function organizeGifts(gifts) {
 
   let letterIndexes = getLetterIndexes(gifts)
   let groupsList = []   // Array to save each group separated
-  var previousIndex = -1  // Variable to save the previous index in the forEach
+  let previousIndex = -1  // Variable to save the previous index in the forEach
 
   // Adding all groups to groupsList
   letterIndexes.forEach(index => {
